@@ -1,0 +1,103 @@
+# Folder Structure for CI/CD Pipeline Repository
+
+# 1. Source Code (src/main.py)
+# This is a simple Python application
+def main():
+    print("Hello, CI/CD Pipeline!")
+
+if __name__ == "__main__":
+    main()
+
+# 2. Test Cases (tests/test_main.py)
+# Basic test case using pytest
+def test_main():
+    assert 1 + 1 == 2  # Sample test
+
+# 3. GitHub Actions Workflow (.github/workflows/ci.yml)
+# YAML file for automated CI pipeline
+ci_yaml = """
+name: CI/CD Pipeline
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+      
+      - name: Set up Python
+        uses: actions/setup-python@v3
+        with:
+          python-version: '3.9'
+      
+      - name: Install Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pytest
+      
+      - name: Run Tests
+        run: pytest tests/
+"""
+
+# 4. Dockerfile
+# Basic Dockerfile for containerization
+dockerfile = """
+FROM python:3.9
+WORKDIR /app
+COPY . .
+RUN pip install --no-cache-dir -r requirements.txt
+CMD ["python", "src/main.py"]
+"""
+
+# 5. README.md
+# Documentation
+readme = """
+# CI/CD Pipeline Demo
+
+This repository demonstrates a basic CI/CD pipeline using GitHub Actions.
+
+## Features
+- Automated testing with GitHub Actions
+- Docker support for containerization
+- Sample Python application
+
+## Getting Started
+1. Clone the repository:
+   ```sh
+   git clone https://github.com/sujal1798/cicd-pipeline-demo.git
+   ```
+2. Run the application:
+   ```sh
+   python src/main.py
+   ```
+3. Run tests:
+   ```sh
+   pytest tests/
+   ```
+"""
+
+# 6. .gitignore
+# Ignore unnecessary files
+gitignore = """
+__pycache__/
+*.pyc
+.env
+venv/
+.DS_Store
+dist/
+build/
+"""
+
+# 7. LICENSE
+# MIT License
+license_text = """
+MIT License
+
+Copyright (c) 2025 Sujal Thakur
+
+Permission is hereby granted, free of charge, to any person obtaining a copy...
+"""
+
+# Save files (in a real repo, these should be committed to GitHub)
